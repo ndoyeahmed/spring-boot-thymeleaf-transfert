@@ -32,6 +32,7 @@ public class PartenaireController {
     public String index(@Valid @ModelAttribute("partenaire") Partenaire p, Model model){
         model.addAttribute("msg","post active");
         iPartenaireService.savePartner(p);
+        model.addAttribute("partenaires", iPartenaireService.getAllPartner());
         return "partenaire/add";
     }
 
