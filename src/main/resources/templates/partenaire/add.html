@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-layout-decorate="~{fragments/layout}">
+<head>
+    <title>Partenaire</title>
+</head>
+<body>
+<div class="right_col" role="main" data-layout-fragment="content">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Partenaire</h3>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12  ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Ajouter Partenaire</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="#"
+                              th:action="@{/partenaire}" th:object="${partenaire}" method="post">
+<!--                            <span th:text="${msg}"></span>-->
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Nom <span
+                                        class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="name" required="required" class="form-control"
+                                           th:field="*{nom}">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">E-mail <span
+                                        class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="text" id="email" name="last-name" required="required"
+                                           class="form-control" th:field="*{mail}">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label for="ninea" class="col-form-label col-md-3 col-sm-3 label-align">NINEA</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input id="ninea" class="form-control" type="text" name="middle-name" th:field="*{ninea}">
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">Téléphone</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input th:field="*{tel}" type="text" class="form-control" data-inputmask="'mask' : '(999) 999-9999'">
+                                    <span class="fa fa-call form-control-feedback right" aria-hidden="true"></span>
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <label for="adresse" class="col-form-label col-md-3 col-sm-3 label-align">Adresse</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <textarea rows="5" id="adresse" class="form-control" type="text" name="middle-name" th:field="*{adresse}"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                                <div class="col-md-6 col-sm-6 offset-md-3">
+                                    <button type="submit" class="btn btn-success">Ajouter</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
