@@ -1,6 +1,6 @@
-package com.penda.transfertargent.transfert.dao;
+package com.mouhamed.transfertargent.transfert.dao;
 
-import com.penda.transfertargent.transfert.model.Partenaire;
+import com.mouhamed.transfertargent.transfert.model.Partenaire;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.penda.transfertargent.transfert;
+package com.mouhamed.transfertargent.transfert;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

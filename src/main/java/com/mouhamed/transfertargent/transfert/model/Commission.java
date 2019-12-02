@@ -1,5 +1,5 @@
 
-package com.penda.transfertargent.transfert.model;
+package com.mouhamed.transfertargent.transfert.model;
 
 import lombok.*;
 

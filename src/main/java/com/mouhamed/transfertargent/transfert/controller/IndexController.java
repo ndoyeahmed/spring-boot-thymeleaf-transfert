@@ -1,4 +1,4 @@
-package com.penda.transfertargent.transfert.controller;
+package com.mouhamed.transfertargent.transfert.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

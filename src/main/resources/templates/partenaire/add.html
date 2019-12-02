@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html data-layout-decorate="~{fragments/layout}"
       lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+>
 <head>
     <title>Partenaire</title>
 </head>
-<body>
+<body id="partner-body">
 <div class="right_col" role="main" data-layout-fragment="content">
     <div class="">
         <div class="page-title">
@@ -21,33 +21,13 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <button class="btn btn-primary" data-target="#partenaireModal" data-toggle="modal"
-                                type="button">Ajouter
+                                id="new-partner" onclick="listPartner()"
+                                type="button">Nouveau
                         </button>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Ninea</th>
-                                <th>Nom</th>
-                                <th>Téléphone</th>
-                                <th>Email</th>
-                                <th>Adresse</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="part : ${partenaires}">
-                                <td th:text="${partenaires.indexOf(part) + 1}"></td>
-                                <td th:text="${part.ninea}"></td>
-                                <td th:text="${part.nom}"></td>
-                                <td th:text="${part.tel}"></td>
-                                <td th:text="${part.mail}"></td>
-                                <td th:text="${part.adresse}"></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div id="feedback"></div>
                     </div>
                 </div>
             </div>
@@ -63,15 +43,13 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="#" class="form-horizontal form-label-left" data-parsley-validate id="demo-form2"
-                          method="post" th:action="@{/partenaire}" th:object="${partenaire}">
+                    <form id="add-partenaire-form">
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Nom <span
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="nom">Nom <span
                                     class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input class="form-control" id="name" required="required" th:field="*{nom}"
-                                       type="text">
+                                <input class="form-control" id="nom" required="required" type="text">
                             </div>
                         </div>
                         <div class="item form-group">
@@ -80,23 +58,20 @@
                             </label>
                             <div class="col-md-6 col-sm-6 ">
                                 <input class="form-control" id="email" name="last-name" required="required"
-                                       th:field="*{mail}" type="text">
+                                       type="text">
                             </div>
                         </div>
                         <div class="item form-group">
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="ninea">NINEA</label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input class="form-control" id="ninea" name="middle-name" th:field="*{ninea}"
-                                       type="text">
+                                <input class="form-control" id="ninea" name="middle-name" type="text">
                             </div>
                         </div>
 
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align">Téléphone</label>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="tel">Téléphone</label>
                             <div class="col-md-6 col-sm-6 ">
-                                <input class="form-control" data-inputmask="'mask' : '(999) 999-9999'" th:field="*{tel}"
-                                       type="text">
-                                <span aria-hidden="true" class="fa fa-call form-control-feedback right"></span>
+                                <input class="form-control" id="tel" type="text">
                             </div>
                         </div>
 
@@ -104,14 +79,14 @@
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="adresse">Adresse</label>
                             <div class="col-md-6 col-sm-6 ">
                                 <textarea class="form-control" id="adresse" name="middle-name" rows="5"
-                                          th:field="*{adresse}" type="text"></textarea>
+                                          type="text"></textarea>
                             </div>
                         </div>
 
                         <div class="ln_solid"></div>
                         <div class="item form-group">
                             <div class="col-md-6 col-sm-6 offset-md-3">
-                                <button class="btn btn-success" type="submit">Ajouter</button>
+                                <button class="btn btn-success" id="add-partner" type="submit">Ajouter</button>
                             </div>
                         </div>
 
@@ -125,6 +100,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

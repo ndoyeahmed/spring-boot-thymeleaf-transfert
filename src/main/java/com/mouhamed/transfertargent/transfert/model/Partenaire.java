@@ -1,5 +1,6 @@
-package com.penda.transfertargent.transfert.model;
+package com.mouhamed.transfertargent.transfert.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,8 +21,10 @@ public class Partenaire {
     private String mail;
     private String tel;
     private String ninea;
+    @JsonIgnore
     @OneToMany(mappedBy = "partenaire")
     private List<Compte>comptes;
+    @JsonIgnore
     @OneToMany(mappedBy = "partenaire")
     private List<Utilisateur>utilisateurList;
 }

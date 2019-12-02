@@ -1,4 +1,4 @@
-package com.penda.transfertargent.transfert;
+package com.mouhamed.transfertargent.transfert;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

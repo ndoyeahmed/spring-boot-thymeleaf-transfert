@@ -1,8 +1,7 @@
-package com.penda.transfertargent.transfert.model;
+package com.mouhamed.transfertargent.transfert.model;
 
 import lombok.*;
 
-import javax.lang.model.element.Name;
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class Compte {
     private String numero;
     private Integer solde;
     @ManyToOne
-    @JoinColumn(name="partenaire_id")
+    @JoinColumn(name = "partenaire")
     private Partenaire partenaire;
     @OneToMany(mappedBy = "compte")
     private List<Utilisateur> utilisateurs;
