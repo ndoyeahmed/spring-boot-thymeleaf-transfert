@@ -28,7 +28,7 @@ public class PartenaireService {
     }
 
     // save partner method implementation
-    public void addPartner(Partenaire partenaire) throws Exception {
+    public boolean addPartner(Partenaire partenaire) throws Exception {
         try {
             partenaireRepository.save(partenaire);
             if (partenaire.getId() != null) {
@@ -37,6 +37,7 @@ public class PartenaireService {
                 compte.setSolde(0);
                 compte.setPartenaire(partenaire);
                 compteRepository.save(compte);
+                return true;
             } else {
                 log.severe("Error on save partner");
                 throw new Exception("Error on save partner");
@@ -54,6 +55,27 @@ public class PartenaireService {
         } catch (Exception e) {
             log.severe(e.getLocalizedMessage());
             return new ArrayList<>();
+        }
+    }
+
+    // get a partner by his id
+    public Partenaire getPartnerById(Long id) {
+        try {
+            return partenaireRepository.findById(id).orElse(null);
+        } catch (Exception e) {
+            log.severe(e.getLocalizedMessage());
+            return null;
+        }
+    }
+
+    // only update a partner
+    public boolean updatePartner(Partenaire partenaire) {
+        try {
+            partenaireRepository.save(partenaire);
+            return true;
+        } catch (Exception e) {
+            log.severe(e.getLocalizedMessage());
+            return false;
         }
     }
 }

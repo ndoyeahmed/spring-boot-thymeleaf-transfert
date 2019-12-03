@@ -6,10 +6,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 
@@ -35,7 +32,7 @@ public class PartenaireController {
     public ResponseEntity addPartner(@RequestBody Partenaire partenaire) {
         try {
             partenaireService.addPartner(partenaire);
-            return ResponseEntity.ok(partenaire);
+            return ResponseEntity.ok(Collections.singletonMap("success", true));
         } catch (Exception e) {
             log.severe(e.getLocalizedMessage());
             return ResponseEntity.status(500)
@@ -47,6 +44,27 @@ public class PartenaireController {
     public ResponseEntity getListPartenaire() {
         try {
             return ResponseEntity.ok(Collections.singletonMap("data", partenaireService.getAllPartner()));
+        } catch (Exception e) {
+            log.severe(e.getLocalizedMessage());
+            return ResponseEntity.status(500).body(e.getLocalizedMessage());
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getPartnerById(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(partenaireService.getPartnerById(id));
+        } catch (Exception e) {
+            log.severe(e.getLocalizedMessage());
+            return ResponseEntity.status(500).body(e.getLocalizedMessage());
+        }
+    }
+
+    @PutMapping
+    public ResponseEntity updatePartner(@RequestBody Partenaire partenaire) {
+        try {
+            boolean result = partenaireService.updatePartner(partenaire);
+            return ResponseEntity.ok(Collections.singletonMap("success", result));
         } catch (Exception e) {
             log.severe(e.getLocalizedMessage());
             return ResponseEntity.status(500).body(e.getLocalizedMessage());

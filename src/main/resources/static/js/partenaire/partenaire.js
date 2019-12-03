@@ -1,18 +1,16 @@
 $(document).ready(function () {
 
     $("#add-partenaire-form").submit(function (event) {
-
         //stop submit the form, we will post it manually.
         event.preventDefault();
-
         addPartner();
-
     });
-
 });
 
 function addPartner() {
+    const idPartner = $("#id-partner").val();
     let partner = {
+        id: idPartner ? idPartner : null,
         nom: $("#nom").val(),
         mail: $("#email").val(),
         ninea: $("#ninea").val(),
@@ -21,7 +19,7 @@ function addPartner() {
     };
 
     $.ajax({
-        type: "POST",
+        type: !idPartner ? "POST" : "PUT",
         contentType: "application/json",
         url: "/transfert/partenaire",
         data: JSON.stringify(partner),
@@ -30,16 +28,15 @@ function addPartner() {
         timeout: 600000,
         success: function (data) {
             setTextToAttrib(null, true);
-            toastSuccess('Opération effectuée avec succès', 'Success');
+            if (data.success) {
+                toastSuccess('Opération effectuée avec succès', 'Success');
+            } else {
+                toastError('Echec de l\'opération', 'Erreur');
+            }
             listPartner();
         },
         error: function (e) {
-
-            let json = "<h4>Ajax Response</h4><pre>"
-                + e.responseText + "</pre>";
-            $('#feedback').html(json);
-
-            console.log("ERROR : ", e);
+            toastError('Echec de l\'opération', 'Erreur');
             // $("#btn-search").prop("disabled", false);
 
         }
@@ -65,17 +62,16 @@ function listPartner() {
                 "                            </thead>\n" +
                 "<tbody>";
             for (const p of data.data) {
-                console.log(p);
                 json = json +
                     "<tr>" +
-                    "<td>" + p.ninea + "</td>" +
+                    "<td id=\"" + p.id + "\">" + p.ninea + "</td>" +
                     "<td>" + p.nom + "</td>" +
                     "<td>" + p.tel + "</td>" +
                     "<td>" + p.mail + "</td>" +
                     "<td>" + p.adresse + "</td>" +
                     "<td>" +
-                    "<button class='btn btn-primary' data-target='#partenaireModal' data-toggle='modal'" +
-                    " onclick='loadPartner(" + p + ")' id='update-partner'>Modifier</button>" +
+                    "<button class='btn btn-primary' data-toggle='modal'" +
+                    " onclick=\"loadPartner(document.getElementById('" + p.id + "').id)\" id='update-partner'>Modifier</button>" +
                     "</td>" +
                     "</tr>"
             }
@@ -84,32 +80,34 @@ function listPartner() {
                 "                        </table>";
             $('#feedback').html(json);
 
-            console.log("SUCCESS : ", data);
-            // $("#btn-search").prop("disabled", false);
-
         },
         error: function (e) {
             console.log(e);
         }
     });
-
 }
 
 function loadPartner(partner) {
     console.log(partner);
     if (partner) {
-        setTextToAttrib(partner, false)
+        $.get("/transfert/partenaire/" + partner, function (data) {
+            console.log(data);
+            setTextToAttrib(data, false);
+            $('#partenaireModal').modal('show');
+        })
     } else console.log('partner is not define')
 }
 
 function setTextToAttrib(val, clear) {
     if (clear) {
-        $("#nom").val('');
-        $("#email").val('');
-        $("#ninea").val('');
-        $("#tel").val('');
-        $("#adresse").val('');
+        $("#id-partner").val(undefined);
+        $("#nom").val(undefined);
+        $("#email").val(undefined);
+        $("#ninea").val(undefined);
+        $("#tel").val(undefined);
+        $("#adresse").val(undefined);
     } else {
+        $("#id-partner").val(val.id);
         $("#nom").val(val.nom);
         $("#email").val(val.mail);
         $("#ninea").val(val.ninea);
