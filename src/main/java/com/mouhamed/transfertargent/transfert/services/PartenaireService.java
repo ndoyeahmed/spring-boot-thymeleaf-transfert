@@ -6,6 +6,7 @@ import com.mouhamed.transfertargent.transfert.model.Compte;
 import com.mouhamed.transfertargent.transfert.model.Partenaire;
 import com.mouhamed.transfertargent.transfert.utils.Utilities;
 import lombok.extern.java.Log;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,9 @@ public class PartenaireService {
     // save partner method implementation
     public boolean addPartner(Partenaire partenaire) throws Exception {
         try {
-            partenaireRepository.save(partenaire);
+            System.out.println(partenaire.getUtilisateurList().get(0).getLogin());
+            return true;
+            /*partenaireRepository.save(partenaire);
             if (partenaire.getId() != null) {
                 Compte compte = new Compte();
                 compte.setNumero(Utilities.genereCode(compteRepository.getLastCompteId().orElse(null)));
@@ -41,7 +44,7 @@ public class PartenaireService {
             } else {
                 log.severe("Error on save partner");
                 throw new Exception("Error on save partner");
-            }
+            }*/
         } catch (Exception e) {
             log.severe(e.getLocalizedMessage());
             throw e;

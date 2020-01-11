@@ -25,6 +25,6 @@ public class Partenaire {
     @OneToMany(mappedBy = "partenaire")
     private List<Compte>comptes;
     @JsonIgnore
-    @OneToMany(mappedBy = "partenaire")
+    @OneToMany(mappedBy = "partenaire", fetch = FetchType.EAGER)
     private List<Utilisateur>utilisateurList;
 }

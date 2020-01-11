@@ -5,6 +5,7 @@ import com.mouhamed.transfertargent.transfert.services.PartenaireService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +13,9 @@ import java.util.Collections;
 
 
 @Controller
-@RequestMapping("/partenaire")
+@RequestMapping("/transfert/partenaire")
 @Log
+@PreAuthorize("hasAuthority('ROLE_SUPERADMIN')")
 public class PartenaireController {
 
     private PartenaireService partenaireService;
@@ -23,11 +25,13 @@ public class PartenaireController {
         this.partenaireService = partenaireService;
     }
 
+    @PreAuthorize("hasAuthority('ROLE_SUPERADMIN')")
     @GetMapping
     public String listPartenaires() {
         return "partenaire/add";
     }
 
+    @PreAuthorize("hasAuthority('ROLE_SUPERADMIN')")
     @PostMapping
     public ResponseEntity addPartner(@RequestBody Partenaire partenaire) {
         try {
@@ -40,6 +44,7 @@ public class PartenaireController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_SUPERADMIN')")
     @GetMapping("/list")
     public ResponseEntity getListPartenaire() {
         try {
@@ -50,6 +55,7 @@ public class PartenaireController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_SUPERADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity getPartnerById(@PathVariable Long id) {
         try {
@@ -60,6 +66,7 @@ public class PartenaireController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_SUPERADMIN')")
     @PutMapping
     public ResponseEntity updatePartner(@RequestBody Partenaire partenaire) {
         try {

@@ -3,10 +3,15 @@ package com.mouhamed.transfertargent.transfert;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
+import org.springframework.web.servlet.resource.*;
 import org.thymeleaf.spring5.ISpringTemplateEngine;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
@@ -48,6 +53,7 @@ public class ThymeleafWebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler(
 
                 "/vendors/**",
+                "/images/**",
                 "/build/**",
                 "/css/**",
                 "/js/**")
@@ -56,6 +62,7 @@ public class ThymeleafWebMvcConfig implements WebMvcConfigurer {
                         "classpath:/static/vendors/",
                         "classpath:/static/build/",
                         "classpath:/static/css/",
+                        "classpath:/static/images/",
                         "classpath:/static/js/");
     }
 }

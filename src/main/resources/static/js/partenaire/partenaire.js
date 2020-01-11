@@ -9,13 +9,20 @@ $(document).ready(function () {
 
 function addPartner() {
     const idPartner = $("#id-partner").val();
+
     let partner = {
         id: idPartner ? idPartner : null,
         nom: $("#nom").val(),
         mail: $("#email").val(),
         ninea: $("#ninea").val(),
         tel: $("#tel").val(),
-        adresse: $("#adresse").val()
+        adresse: $("#adresse").val(),
+       /* utilisateurList: [
+            {
+                nomComplet: $("prenom_nom").val(),
+                email: $("mail_user").val()
+            }
+        ]*/
     };
 
     $.ajax({
@@ -36,6 +43,7 @@ function addPartner() {
             listPartner();
         },
         error: function (e) {
+            console.log(e);
             toastError('Echec de l\'opération', 'Erreur');
             // $("#btn-search").prop("disabled", false);
 
