@@ -23,9 +23,9 @@ public class CustumUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Utilisateur user = utilisateurRepository.findByLogin(username);
+        Utilisateur user = utilisateurRepository.findByUsername(username);
         if (user != null) {
-            return new User(user.getLogin(), user.getPwd(),
+            return new User(user.getUsername(), user.getPassword(),
                     true, true, true, true, getAuthorities(user.getRoles()));
         }
         return null;

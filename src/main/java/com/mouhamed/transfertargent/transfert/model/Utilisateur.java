@@ -20,8 +20,8 @@ public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String login;
-    private String pwd;
+    private String username;
+    private String password;
     private String nomComplet;
     private String email;
     private String photo;

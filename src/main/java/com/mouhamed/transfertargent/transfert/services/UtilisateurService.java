@@ -23,9 +23,9 @@ public class UtilisateurService {
 
     public boolean changeUserPassword(String username, String newPassword) throws Exception {
         try {
-            Utilisateur utilisateur = utilisateurRepository.findByLogin(username);
+            Utilisateur utilisateur = utilisateurRepository.findByUsername(username);
             if (utilisateur != null) {
-                utilisateur.setPwd(encode.encode(newPassword));
+                utilisateur.setPassword(encode.encode(newPassword));
                 utilisateur.setActive(true);
                 utilisateurRepository.save(utilisateur);
                 return true;
@@ -38,7 +38,7 @@ public class UtilisateurService {
 
     public Utilisateur findByLogin(String login) {
         try {
-            return utilisateurRepository.findByLogin(login);
+            return utilisateurRepository.findByUsername(login);
         } catch (Exception e) {
             log.severe(e.getLocalizedMessage());
             throw e;

@@ -40,7 +40,7 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
-
+        System.out.println(response.getHeader(SecurityConstants.HEADER_STRING));
         if (!hasTemporaryPassword(authentication)) {
             response.sendRedirect("/change-password");
         } else {
@@ -53,7 +53,7 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
         try {
             User user = (User) authentication.getPrincipal();
             if (user != null) {
-                Utilisateur utilisateur = utilisateurRepository.findByLogin(user.getUsername());
+                Utilisateur utilisateur = utilisateurRepository.findByUsername(user.getUsername());
                 return utilisateur.isActive();
             } else throw new Exception("null");
         } catch (Exception e) {

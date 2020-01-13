@@ -31,7 +31,7 @@ public class PartenaireService {
     // save partner method implementation
     public boolean addPartner(Partenaire partenaire) throws Exception {
         try {
-            System.out.println(partenaire.getUtilisateurList().get(0).getLogin());
+            System.out.println(partenaire.getUtilisateurList().get(0).getUsername());
             return true;
             /*partenaireRepository.save(partenaire);
             if (partenaire.getId() != null) {
