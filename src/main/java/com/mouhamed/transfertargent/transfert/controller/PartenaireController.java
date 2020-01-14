@@ -77,4 +77,14 @@ public class PartenaireController {
             return ResponseEntity.status(500).body(e.getLocalizedMessage());
         }
     }
+
+    @GetMapping("/search/{ninea}")
+    public ResponseEntity<?> searchByNinea(@PathVariable String ninea) {
+        try {
+            return ResponseEntity.ok(partenaireService.findByNinea(ninea));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(e.getLocalizedMessage());
+        }
+    }
 }

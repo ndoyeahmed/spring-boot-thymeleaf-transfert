@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     $("#valider").attr("disabled", true);
     $("#confirmPassword").on("keyup", function () {
         const npwd = $("#newPassword").val();
@@ -13,7 +14,17 @@ $(document).ready(function () {
         } else {
             $("#valider").attr("disabled", true);
         }
-    })
+    });
+    $('#fichier').change(function () {
+        if (this.files && this.files[0]) {
+            var file = this.files[0];
+            var imagefile = file.type;
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
+        }
+
+    });
 });
 
 function verifier() {
@@ -54,4 +65,64 @@ function toastError(message, title) {
         textAlign: 'left',            // Alignment of text i.e. left, right, center
         position: 'top-right'       // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
     })
+}
+
+function imageIsLoaded(e) {
+    //$("#file").css("color","green");
+    //$('#image_preview').css("display", "block");
+    $('#image').attr('src', e.target.result);
+    $('#image').attr('width', '100px');
+    $('#image').attr('height', '100px');
+}
+
+function setImageURL(src) {
+    $('#image').attr('src', src);
+}
+
+function loadImageByName() {
+    $.ajax({
+        type: "GET",
+        contentType: "application/octet-stream",
+        url: "/image-update",
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            if (data) {
+                // console.log(data);
+                $("#thumb1").html('<img alt="test" src="data:image/jpg;base64,' + data + '" />');
+            } else {
+                console.log('not disabled fields');
+            }
+        },
+        error: function (e) {
+            console.log(e);
+            // $("#btn-search").prop("disabled", false);
+        }
+    });
+}
+
+function getConnectedUserImg() {
+    let photo;
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "connected-user",
+        dataType: 'json',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            if (data.response) {
+                photo = data.response.photo;
+            } else {
+                console.log('not disabled fields');
+            }
+        },
+        error: function (e) {
+            console.log(e);
+            // $("#btn-search").prop("disabled", false);
+        },
+        complete: function () {
+            $("imgdiv").html('<img alt=\"t\" th:src=\"@{\'image-update/' + photo ? photo : 'default.jpg' + '\'\" id=\"image\"/>')
+        }
+    });
 }

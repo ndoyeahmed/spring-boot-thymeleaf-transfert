@@ -36,11 +36,14 @@ public class Utilisateur {
     private Compte compte;
 
     @OneToMany(mappedBy = "expediteur")
+    @JsonIgnore
     private List<Transaction> transactionListExp;
     @OneToMany(mappedBy = "destinataire")
+    @JsonIgnore
     private List<Transaction> transactionListDest ;
 
     @OneToMany(mappedBy = "utilisateur")
+    @JsonIgnore
     private List<Versement> versementList ;
 
     @ManyToMany(fetch = FetchType.EAGER)

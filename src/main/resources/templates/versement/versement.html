@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html data-layout-decorate="~{fragments/layout}"
+      lang="en"
+>
+<head>
+    <title>Versement</title>
+</head>
+<body id="partner-body" onload="listPartner()">
+<div class="right_col" role="main" data-layout-fragment="content">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Versement</h3>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12  ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <form id="versement-add">
+                            <input class="form-control" id="id-partner" required="required" type="hidden">
+                            <h3>Partenaire</h3>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="ninea">NINEA</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input class="form-control" id="ninea" name="middle-name" type="text">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="nom">Nom <span
+                                        class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input class="form-control" id="nom" required="required" type="text">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">E-mail <span
+                                        class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input class="form-control" id="email" name="last-name" required="required"
+                                           type="text">
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="tel">Téléphone</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input class="form-control" id="tel" type="text">
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="adresse">Adresse</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                <textarea class="form-control" id="adresse" name="middle-name" rows="5"
+                                          type="text"></textarea>
+                                </div>
+                            </div>
+
+                            <h3>Compte</h3>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="montant">Montant</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input class="form-control" id="montant" name="middle-name" type="number">
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                                <div class="col-md-6 col-sm-6 offset-md-3">
+                                    <button class="btn btn-success" id="add-partner" type="submit">Valider</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -40,7 +40,6 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
-        System.out.println(response.getHeader(SecurityConstants.HEADER_STRING));
         if (!hasTemporaryPassword(authentication)) {
             response.sendRedirect("/change-password");
         } else {

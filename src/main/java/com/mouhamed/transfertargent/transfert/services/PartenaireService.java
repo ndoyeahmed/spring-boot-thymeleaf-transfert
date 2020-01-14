@@ -81,4 +81,14 @@ public class PartenaireService {
             return false;
         }
     }
+
+    // find a partner by ninea
+    public Partenaire findByNinea(String ninea) {
+        try {
+            return partenaireRepository.findByNinea(ninea).orElse(null);
+        } catch (Exception e) {
+            log.severe(e.getLocalizedMessage());
+            return null;
+        }
+    }
 }
