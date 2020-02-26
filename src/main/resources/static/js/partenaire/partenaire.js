@@ -1,9 +1,26 @@
+let osById;
+let logiciel = [];
+
 $(document).ready(function () {
 
-    $("#add-partenaire-form").submit(function (event) {
+    loadOs();
+    loadLogiciel();
+
+    $("select#osDropdown").change(function () {
+        const selectedOs = $(this).children("option:selected").val();
+        $.ajax({
+            url: "/transfert/ordinateur/os/" + selectedOs,
+            type: 'GET',
+            success: function (x) {
+                osById = x;
+            }
+        });
+    });
+
+    $("#ordinateur-add").submit(function (event) {
         //stop submit the form, we will post it manually.
         event.preventDefault();
-        addPartner();
+        save();
     });
 });
 
@@ -17,12 +34,12 @@ function addPartner() {
         ninea: $("#ninea").val(),
         tel: $("#tel").val(),
         adresse: $("#adresse").val(),
-       /* utilisateurList: [
-            {
-                nomComplet: $("prenom_nom").val(),
-                email: $("mail_user").val()
-            }
-        ]*/
+        /* utilisateurList: [
+             {
+                 nomComplet: $("prenom_nom").val(),
+                 email: $("mail_user").val()
+             }
+         ]*/
     };
 
     $.ajax({
@@ -153,3 +170,69 @@ function toastError(message, title) {
         position: 'top-right'       // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
     })
 }
+
+// -----------ordinateur ---------------
+function loadLogiciel() {
+    $.ajax({
+        url: "/transfert/ordinateur/logiciels",
+        type: 'GET',
+        success: function (x) {
+            for (const z of x) {
+                $('#logicielList').append('<input type="checkbox" name="logiciel" class="checkbox" value="' + z.id + '" />' + z.libelle + ' ' + z.version);
+            }
+        }
+    });
+}
+
+function loadOs() {
+    $.ajax({
+        url: "/transfert/ordinateur/os",
+        type: 'GET',
+        success: function (x) {
+            for (const z of x) {
+                $('#osDropdown').append('<option value="' + z.id + '">' + z.libelle + '</option>');
+            }
+        }
+    });
+}
+
+function save() {
+    let ordinateur = {
+        code: $("#code").val(),
+        processeur: $("#processeur").val(),
+        ram: $("#ram").val(),
+        disque: $("#disque").val(),
+        ecran: $("#ecran").val(),
+        os: osById,
+    };
+
+    $.each($("input[name='logiciel']:checked"), function () {
+        logiciel.push($(this).val());
+    });
+
+    console.log(logiciel);
+    saveOrdinateur(ordinateur);
+}
+
+function saveOrdinateur(ordinateur) {
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/transfert/ordinateur",
+        data: JSON.stringify(ordinateur),
+        dataType: 'json',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (e) {
+            console.log(e);
+            toastError('Echec de l\'opération', 'Erreur');
+            // $("#btn-search").prop("disabled", false);
+
+        }
+    });
+}
+
+
