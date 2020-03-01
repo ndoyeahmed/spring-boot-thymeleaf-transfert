@@ -46,11 +46,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/").authenticated()
+                .antMatchers("/").permitAll()
                 .antMatchers("/static/**").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/transfert/**").authenticated()
-                .antMatchers("/transfert/ordinateur").permitAll()
+                .antMatchers("/transfert/**").permitAll()
                 .and()
                 .formLogin().loginPage("/login").failureUrl("/login?error")
                 .successHandler(myAuthenticationSuccessHandler())

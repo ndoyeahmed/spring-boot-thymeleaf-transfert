@@ -3,25 +3,32 @@ let logiciel = [];
 
 $(document).ready(function () {
 
-    loadOs();
-    loadLogiciel();
+    /*loadOs();
+    loadLogiciel();*/
 
-    $("select#osDropdown").change(function () {
-        const selectedOs = $(this).children("option:selected").val();
-        $.ajax({
-            url: "/transfert/ordinateur/os/" + selectedOs,
-            type: 'GET',
-            success: function (x) {
-                osById = x;
-            }
+    personneList();
+    /*
+        $("select#osDropdown").change(function () {
+            const selectedOs = $(this).children("option:selected").val();
+            $.ajax({
+                url: "/transfert/ordinateur/os/" + selectedOs,
+                type: 'GET',
+                success: function (x) {
+                    osById = x;
+                }
+            });
         });
-    });
 
-    $("#ordinateur-add").submit(function (event) {
-        //stop submit the form, we will post it manually.
+        $("#ordinateur-add").submit(function (event) {
+            //stop submit the form, we will post it manually.
+            event.preventDefault();
+            save();
+        });*/
+
+    $("#personne-add").submit(function (event) {
+        savePersonne();
         event.preventDefault();
-        save();
-    });
+    })
 });
 
 function addPartner() {
@@ -231,6 +238,42 @@ function saveOrdinateur(ordinateur) {
             toastError('Echec de l\'opération', 'Erreur');
             // $("#btn-search").prop("disabled", false);
 
+        }
+    });
+}
+
+function savePersonne() {
+    const personne = {
+        nom: $("#nompersonne"),
+        prenom: $("#prenompersonne")
+    };
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/transfert/personnes/add",
+        data: JSON.stringify(personne),
+        dataType: 'json',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (e) {
+            console.log(e);
+            toastError('Echec de l\'opération', 'Erreur');
+            // $("#btn-search").prop("disabled", false);
+
+        }
+    });
+}
+
+function personneList() {
+    $.ajax({
+        url: "/transfert/personnes/all",
+        type: 'GET',
+        success: function (x) {
+            console.log(x);
         }
     });
 }

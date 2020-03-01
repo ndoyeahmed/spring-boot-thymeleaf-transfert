@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html data-layout-decorate="~{fragments/layout}"
+      lang="en"
+>
+<head>
+    <title>Personne</title>
+</head>
+<body id="partner-body" onload="listPartner()">
+<div class="right_col" data-layout-fragment="content" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Personne</h3>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12  ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <form id="personne-add">
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                       for="nompersonne">Nom</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input class="form-control" id="nompersonne" name="nompersonne" type="text">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="prenompersonne">Prenom
+                                    <span
+                                            class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input class="form-control" id="prenompersonne" name="prenompersonne"
+                                           required="required" type="text">
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                                <div class="col-md-6 col-sm-6 offset-md-3">
+                                    <input class="btn btn-success" id="add-personne" type="submit" value="Enregistrer"/>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
