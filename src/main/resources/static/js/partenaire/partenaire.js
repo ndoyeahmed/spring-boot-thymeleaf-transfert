@@ -26,8 +26,8 @@ $(document).ready(function () {
         });*/
 
     $("#personne-add").submit(function (event) {
-        savePersonne();
         event.preventDefault();
+        savePersonne();
     })
 });
 

@@ -23,11 +23,13 @@ public class PersonneController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ROLE_SUPERADMIN')")
     public String index() {
         return "personnes";
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasAuthority('ROLE_SUPERADMIN')")
     public ResponseEntity<?> getAllPersonne() {
         return ResponseEntity.ok(personneService.findAllPersonne());
     }
